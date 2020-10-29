@@ -24,7 +24,7 @@ Note: A leaf is a node with no children.
      * }
      */
 
-
+// queue will store object having node and depth as fields
     class qData {
         TreeNode node;
         int depth;
@@ -37,21 +37,29 @@ Note: A leaf is a node with no children.
 
     class Solution {
         public int minDepth(TreeNode root) {
+        //corner case
             if (root == null)
                 return 0;
             Queue<qData> q = new LinkedList<>();
             qData qd = new qData(root, 1);
             q.add(qd);
 
+         // Level order traversal
             while (!q.isEmpty()) {
 
+               //remove fromt element of queue
                 qd = q.remove();
+                //getting details of removed element
                 TreeNode node = qd.node;
                 int depth = qd.depth;
-                if (node.left == null && node.right == null) {
+                
+                // If this is the first leaf node seen so far  then return depth
+              if (node.left == null && node.right == null) {
 
                     return depth;
                 }
+                // If left subtree is not null then add it to queue  
+            
                 if (node.left != null) {
 
                     TreeNode newNode = node.left;
@@ -60,7 +68,7 @@ Note: A leaf is a node with no children.
                     q.add(newQData);
                 }
 
-
+                 // If right subtree is not null then add it to queue  
                 if (node.right != null) {
 
                     TreeNode newNode = node.right;
